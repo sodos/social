@@ -1,0 +1,13 @@
+#!/bin/bash
+ 
+# Invoke the Forever module (to START our Node.js server).
+export TZ=utc
+forever \
+start \
+--minUptime 1000 \
+--spinSleepTime 1000 \
+-al forever.log \
+-ao out.log \
+-ae err.log \
+server.js
+

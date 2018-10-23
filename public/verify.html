@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="faithcanon">
+<head>
+    <title>Model Html</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script><!-- load angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/verify.js"></script>
+</head>
+<body  ng-controller="FcMainController">
+    <div class="container" >
+        <!-- <a class="modelClick btn btn-primary" href="javascript:;" data-model="#inquiryModel" style="z-index: 999;position: absolute;">
+            <span>Join</span>
+        </a> -->
+        <img src="../images/wallfinal-cmp.jpg" border="0" alt="" style="width: 100%;z-index: 0;margin: 0px;padding: 0px;position: fixed;left: 0px;top: 0px;">
+    </div>
+
+    <!-- Model HTML -->
+    <div class="customModel" id="inquiryModel">
+        <div class="customModel-backdrop"></div>
+        <div class="model-area">
+            <div class="model-content">
+                <div class="model-remove"></div>
+                <div class="model-body">
+                    <img src="../images/logo.jpg" class="img-responsive">
+                    <div class="new_sign_up">
+                        <div class="signup_with_social currentShow" style="text-align: center;line-height: 25pt;font-size: 21pt;padding-top: 80px;margin-bottom: 110px;">
+                            <p>Your account has been successfully verified.</p>                            
+                        </div>                        
+                    </div>
+                    <div class="sign_up">
+                        <div class="already_acc currentShow">
+                            <h4 class="sign_title">Faithcanon member?</h4>
+                            <form name="loginForm">                                
+                                 <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+                                    <label>Email address</label>
+                                    <input type="email" name="email" class="form-control" ng-model="loginFormData.email">
+                                    <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sub_pass">Password</label>
+                                    <input class="form-control" type="password" ng-model="loginFormData.password" id="sub_pass">
+                                </div>
+                                <div class="form-group">
+                                    <a href="javascript:;" data-show="forgot_pass" class="signToggle">Forgot Password?</a>
+                                </div>
+                                <button class="btn btn-success" type="submit" ng-disabled="loginForm.$invalid"  ng-click="login()">Log In</button>
+                            </form>
+                        </div>
+                        <div id="forgot_pass" class="hidden">
+                            <h4 class="sign_title">Forgot your password?</h4>
+                            <p>
+                                <small>No problem. Just enter your email address below — we’ll send you a link to reset it.</small>
+                            </p>
+                            <form name="forgotForm">                               
+                                <div class="form-group" ng-class="{ 'has-error' : forgotForm.email.$invalid && !forgotForm.email.$pristine }">
+                                    <label>Email address</label>
+                                    <input type="email" name="email" class="form-control" ng-model="forgotFormData.email">
+                                    <p ng-show="forgotForm.email.$invalid && !forgotForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <button class="btn btn-success btn-block" type="submit" ng-disabled="forgotForm.$invalid" ng-click="forgot()">Send Link</button>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <button class="btn btn-default btn-block removeToggle" type="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

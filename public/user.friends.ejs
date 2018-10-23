@@ -1,0 +1,54 @@
+<% include user.header.ejs %>
+<body ng-controller="FcMainController">
+<div class="app">
+  <!-- aside -->
+  <aside id="aside" class="app-aside modal fade folded" role="menu">
+    <% include user.nav.ejs %>
+  </aside>  
+  <!-- / aside -->
+  <!-- content -->
+  <div id="content" class="app-content" role="main">
+    <div class="box">          
+    <!-- Content Navbar -->
+    <% include user.top.nav.ejs %>
+    <!-- Content -->
+
+      <div class="box-row">
+        <div class="box-cell">
+          <div class="box-inner padding">
+           
+            <div class="row">
+              <% profiles.forEach(function(profile) { %>
+              <div class="col-sm-3">
+                <div class="card">                  
+                  <div class="item" style="height:256.5px;text-align:center;">
+                    <img src="<%=baseURL%>/<%= profile.profile_image_url ? profile.profile_image_url : 'images/user.default.jpg' %>" style="width:100%;z-index:0;" alt="<%= profile.last_name %> <%= profile.first_name %>">
+                    <!-- <div class="bottom text-white p-md">
+                      <%= profile.last_name %> <%= profile.first_name %>
+                    </div> -->
+                  </div>
+                  
+                  <%if (_id==my_id) { %> 
+                     <a  style="z-index:11;" md-ink-ripple="" data-id="<%= profile._id %>" ng-click="remove_friend($event)" class="md-btn md-raised md-fab m-r md-fab-offset pull-right bg-white"><i class="icon mdi-content-remove-circle-outline i-20"></i></a>
+                  <% } else { %> 
+                    <a  style="z-index:11;" md-ink-ripple="" data-id="<%= profile._id %>" ng-click="add_friend($event)" class="md-btn md-raised md-fab m-r md-fab-offset pull-right bg-white"><i class="icon mdi-social-person-add i-20"></i></a>                   
+                  <% } %> 
+
+                  <div class="card-body" style="z-index:10;position:relative;background-color:white;opacity:0.85;">
+                    <h3 style="cursor:pointer;" data-id="<%= profile._id %>" ng-click="show_profile($event)" class="no-margin m-b"> <%= profile.first_name ? (profile.last_name+ " " +profile.first_name) : profile.displayName %></h3>                    
+                    <p style="min-height: 60px;">
+                      <%=profile.bio.substring(0, 90)%>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <% }); %>
+            </div> <!-- / row  -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / content -->
+
+<% include user.footer.ejs %>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html ng-app="faithcanon">
+<head>
+    <title>Model Html</title>
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../css/main.css">
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular.min.js"></script><!-- load angular -->
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.19/angular-cookies.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../js/reset.js"></script>
+</head>
+<body  ng-controller="FcMainController">
+    <div class="container" >
+        <!-- <a class="modelClick btn btn-primary" href="javascript:;" data-model="#inquiryModel" style="z-index: 999;position: absolute;">
+            <span>Join</span>
+        </a> -->
+        <img src="../images/wallfinal-cmp.jpg" border="0" alt="" style="width: 100%;z-index: 0;margin: 0px;padding: 0px;position: fixed;left: 0px;top: 0px;">
+    </div>
+
+    <!-- Model HTML -->
+    <div class="customModel" id="inquiryModel">
+        <div class="customModel-backdrop"></div>
+        <div class="model-area" style="width: 400px;">
+            <div class="model-content">
+                <div class="model-remove"></div>
+                <div class="model-body">                    
+                        <div class="currentShow">
+                            <div class="col-md-12 row">
+                                <img src="../images/logo.jpg" class="img-responsive pull-right">
+                            </div>
+                            <form name="joinForm">
+                                <div class="form-group" ng-class="{ 'has-error' : joinForm.password.$invalid && !userForm.password.$pristine }">
+                                    <!-- <input type="hidden" name="_id" id="_id" value="" ng-model="resetFormData._id"> -->
+                                    <label for="cre_pass">Create a password</label>
+                                    <input class="form-control" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" type="password" ng-required ng-model="resetFormData.password" name="password" ng-minlength="8" ng-maxlength="20">
+                                    <p ng-show="joinForm.password.$error.minlength" class="help-block">Password is too short.</p>
+                                    <p ng-show="joinForm.password.$error.maxlength" class="help-block">Password is too long.</p> 
+                                    <p ng-show="joinForm.password.$error.pattern" class="help-block">
+                                        Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.) </p>                                   
+                                </div>
+                                <div class="form-group" ng-class="{'has-error':joinForm.re_password.$invalid && !joinForm.re_password.$pristine}">
+                                    <label for="cre_pass">Retype password</label>
+                                    <input class="form-control" type="password" name="re_password" required id="retype_password" ng-model="resetFormData.re_password" valid-password-c="resetFormData.password"> 
+                                    <p ng-show="joinForm.re_password.$error.noMatch" class="help-block">Passwords do not match.</p>
+                                </div>                               
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <button class="btn btn-success btn-block" type="submit" ng-disabled="joinForm.$invalid" ng-click="reset()">Update</button>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <button class="btn btn-default btn-block removeToggle" type="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>                                       
+                    </div>
+                </div>
+            </div>
+        </div>
+</body>
+</html>

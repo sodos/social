@@ -1,0 +1,72 @@
+<% include user.header.ejs %>
+<body ng-controller="FcMainController">
+<div class="app">
+  <!-- aside -->
+  <aside id="aside" class="app-aside modal fade folded" role="menu">
+    <% include user.nav.ejs %>
+  </aside>  
+  <!-- / aside -->
+  <!-- content -->
+  <div id="content" class="app-content" role="main">
+    <div class="box">
+    <!-- Content Navbar -->
+    <% include user.top.nav.ejs %>
+    <!-- Content -->
+
+      <div class="box-row">
+        <div class="box-cell">
+          <div class="box-inner padding">
+            
+
+  <div class="row">
+    <div class="col-lg-10 col-md-10 col-sm-10">
+      <div class="row no-gutter">
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-heading">
+              <a href="https://www.acts246.com" target="_blank">https://www.acts246.com</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-heading">
+              <a href="https://roland-j-hill.mykajabi.com" target="_blank">Dr. Roland J. HillJ.</a>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card">
+            <div class="card-heading">
+              <a href="http://www.hopefortheheart.org" target="_blank">Hope of the Heart</a>
+            </div>
+          </div>
+        </div>        
+      </div>           
+    </div>    
+    <div class="col-md-2 col-sm-2">
+      <h4 class="m-l">Connected</h4>
+      <ul class="list-group no-bg no-borders pull-in" id="fr_list" style="display:none">
+        <li class="list-group-item clearfix" data-toggle="modal" data-target="#chat" data-dismiss="modal" ng-repeat="row in rows_fr_profiles">
+          <a herf="" class="pull-left w-40 m-r">
+            <img ng-src="<%=baseURL%>/{{ row.profile_image_url ? row.profile_image_url :  'images/user.default.jpg'  }}" alt="{{ row.last_name }} {{ row.first_name }}" class="w-full img-circle">
+          </a>
+          <div class="clear text-ellipsis">
+            <div><a href="" class="text-xs">{{ row.last_name }}  {{ row.first_name }}</a></div>
+            <small class="text-muted-dk text-xxs">Added : {{ row.added_on }} ago</small>
+          </div>
+        </li>        
+      </ul>
+    </div>
+  </div>
+
+
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- / content -->
+
+<% include user.footer.ejs %>

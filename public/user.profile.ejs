@@ -1,0 +1,230 @@
+<% include user.profile.header.ejs %>
+<body ng-controller="FcMainController">
+<div class="app">
+  <!-- aside -->
+  <aside id="aside" class="app-aside modal fade folded" role="menu">
+    <% include user.nav.ejs %>
+  </aside>  
+  <!-- / aside -->
+  <!-- content -->
+  <div id="content" class="app-content" role="main">
+    <div class="box">
+    <!-- Content Navbar -->
+    <% include user.top.nav.ejs %>
+    <!-- Content -->
+
+      <div class="box-row">
+        <div class="box-cell">
+          <div class="box-inner padding">
+            
+
+<div class="padding-out">
+  <div class="p-h-md p-v bg-white box-shadow pos-rlt">
+    <h3 class="no-margin"><!-- Profile --></h3>
+  </div>
+  <div class="box">
+    <div class="col-md-3">
+      <div id="user_profile_img_wrapper" style="position: relative;z-index: 1;background:url(<%=baseURL%>/<%= profile_image_url ? profile_image_url : 'images/user.default.jpg' %>) center center; background-size:cover">
+        <div class="p-lg bg-white-overlay text-center">
+          <a href class="w-xs inline">
+            <img id="user_profile_img" ng-src="<%=baseURL%>/<%= profile_image_url ? profile_image_url : 'images/user.default.jpg' %>" class="img-circle img-responsive">
+          </a>
+          <br>
+          <div class="form-file" id="user-dp-update" style="display:none;margin-top:20px;">
+            <button ngf-select="uploadFiles($files, $invalidFiles)"
+                    accept="image/*" ngf-max-size="5MB">
+                upload new</button>            
+            <ul>              
+            <li ng-repeat="f in errFiles" style="font:smaller">{{f.$error}} {{f.$errorParam}}</li> 
+            </ul>
+            {{errorMsg}}
+          </div>
+          <div class="m-b m-t-sm h2">
+            <span class="text-black"><%=last_name%> <%=first_name%></span>
+          </div>          
+        </div>       
+       <div id="profile_progress_bar" class="progress progress-striped active" style="display:none;position: absolute;top: 0px;z-index: 2;background: #e9e9e980;width: 100%;height: 100%;">
+               <div id="dvProgress" class="progress-bar progress-bar-info"  style="height: 20px;width: 0%;top: 50%;position:relative;" >0%</div>               
+             </div>
+      </div>     
+      <div class="list-group no-radius no-border" style="margin-bottom: 1px">
+        <a class="list-group-item active">
+          <span class="pull-right badge"></span> Profile
+        </a>
+        <a class="list-group-item ">
+          <span class="pull-right badge">12</span> Messages
+        </a>
+        <a class="list-group-item " tabindex="0" style="">
+          <span class="pull-right badge">0</span> Photos
+        </a>
+        <a class="list-group-item" tabindex="0" style="">
+          <span class="pull-right badge ng-binding">0</span> Posts
+        </a>
+        <a class="list-group-item">
+          <span class="pull-right badge ng-binding">0</span> Friends
+        </a>
+      </div>
+      <div class="text-center b-b b-light" style="background-color: white">
+        <a href="" class="inline m text-color">
+          <span class="h3 block font-bold">221</span>
+          <em class="text-xs">Followers</em>
+        </a>
+        <a href="" class="inline m text-color">
+          <span class="h3 block font-bold">250</span>
+          <em class="text-xs">Following</em>
+        </a>
+      </div>
+      <div class="p" style=" background-color: white">
+        <!-- <p>About</p> -->
+        <!-- <p><%=bio%> </p> -->
+        <div class="m-v">
+          <a class="text-muted">
+            <i class="fa ui-icon fa-facebook"></i>
+          </a>
+          <a class="text-muted">
+            <i class="fa ui-icon fa-twitter"></i>
+          </a>
+          <a class="text-muted">
+            <i class="fa ui-icon fa-linkedin"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-9 b-l bg-white bg-auto">
+      <div class="p-md bg-light lt b-b font-bold">
+                
+      </div>
+
+      <form role="form" class="p-md col-md-6"  name="userForm" id="userForm">
+        <div style="position: relative;z-index: 1;">
+          <div class="form-group">                   
+          </div>
+
+          <div class="form-group">
+              <label>Privacy</label><br>
+              <label class="md-check">
+                  <input type="radio" value="0" <%= user_privacy=='0' ? 'checked' : '' %> name="user_privacy" >
+                  <i class="green"></i>
+                  Public
+              </label>
+              <label class="md-check">
+                  <input type="radio" value="1" <%= user_privacy=='1' ? 'checked' : '' %> name="user_privacy" >
+                  <i class="blue"></i>
+                  Friends
+              </label>
+              <label class="md-check">
+                  <input type="radio" value="2" <%= user_privacy=='2' ? 'checked' : '' %> name="user_privacy" >
+                  <i class="red"></i>
+                  Private
+              </label>
+          </div> 
+
+          <div class="form-group">
+            <label>Display Name</label>
+            <input type="text" class="form-control" name="displayName" value="<%=displayName%>" >
+          </div>
+          <div class="form-group">
+            <label>Email address</label>
+            <input type="email" class="form-control" value="<%=email%>" disabled>
+          </div> 
+          <script type="text/javascript">
+              angular.module('faithcanon')
+                .value('first_name', '<%= first_name %>');
+              angular.module('faithcanon')
+                .value('phone_no', <%= phone_no %>);
+          </script>
+          <div class="form-group" ng-class="{ 'has-error' : userForm.first_name.$invalid }">
+            <label>First Name</label>
+            <input type="text" ng-required="true" class="form-control" name="first_name" ng-model="userData.first_name" >
+            <p class="help-block" ng-show="userForm.first_name.$error.required">First Name is Required.</p>
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" name="last_name" value="<%=last_name%>" >
+          </div>
+          <div class="form-group">
+            <label>Date Of birth</label>
+            <input type="date" class="form-control" name="dob" value="<%=dob%>" >
+          </div>
+          <div class="form-group" ng-class="{ 'has-error' : userForm.phone_no.$invalid }">
+            <label>Phone Number</label>
+            <input type="number" class="form-control" ng-minlength="10" ng-maxlength="10" ng-model="userData.phone_no"  name="phone_no" >
+            <p class="help-block" ng-show="userForm.phone_no.$error.minlength">Phone Number can not be less that 10 digit.</p>          
+            <p class="help-block" ng-show="userForm.phone_no.$error.maxlength">Phone Number will be 10 digit Only.</p>          
+            <p class="help-block" ng-show="userForm.phone_no.$error.number">Only Numbers are allowed.</p>
+          </div>
+          <div class="form-group">
+            <label>Location</label>
+            <input type="text" class="form-control" id="city" value="<%= city ? ( city + ', ' ): '' %> <%= state ? ( state + ', ' ): '' %><%=country%>" >
+            <input type="hidden" class="form-control" id="locality" name="city" value="<%=city%>" >
+            <input type="hidden" class="form-control" id="administrative_area_level_1" name="state" value="<%=state%>" >
+            <input type="hidden" class="form-control" id="country" name="country" value="<%=country%>" >
+            <input type="hidden" class="form-control" id="postal_code" name="postal_code" value="<%=postal_code%>" >
+          </div>
+          <div class="form-group">
+              <label>Gender</label><br>
+              <label class="md-check">
+                  <input type="radio" value="male" name="gender" <%= gender=='male' ? 'checked' : '' %> style="">
+                  <i class="green"></i>
+                  Male
+              </label>
+              <label class="md-check">
+                  <input type="radio" value="female" <%= gender=='female' ? 'checked' : '' %> name="gender" style="">
+                  <i class="green"></i>
+                  Female
+              </label>
+          </div> 
+          <div class="form-group">
+            <label>About</label>
+            <textarea class="form-control" name="bio"><%=bio%></textarea>             
+          </div>         
+          <button ng-click="update()" class="btn btn-info m-t pull-right" ng-disabled="userForm.$invalid">Update Profile</button>
+        </div>
+        <div id="profile_data" class="progress progress-striped active" style="display:none;position: absolute;top: 0px;z-index: 2;background: #e9e9e980;width: 100%;height: 100%;">
+           <div class="dvProgress progress-bar progress-bar-success"  style="display:none;height: 50px;width: 0%;top: 50%;position:relative;padding-top: 12px;font-size: medium;" >Profile updated successfully</div>               
+        </div>
+      </form>
+
+      <form role="form" class="p-md col-md-6"  name="userPasswordForm" id="userPasswordForm" style="padding-top:100px;display:none;">
+        <div style="position: relative;z-index: 1;">
+          <div class="form-group" ng-class="{ 'has-error' : userPasswordForm.password.$invalid && !userForm.password.$pristine }">
+              <label for="cre_pass">New password</label>
+              <input class="form-control" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" type="password" ng-required ng-model="upData.password" name="password" ng-minlength="8" ng-maxlength="20">
+              <p ng-show="userPasswordForm.password.$error.minlength" class="help-block">Password is too short.</p>
+              <p ng-show="userPasswordForm.password.$error.maxlength" class="help-block">Password is too long.</p> 
+              <p ng-show="userPasswordForm.password.$error.pattern" class="help-block">
+                  Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.) </p>                                   
+          </div>
+          <div class="form-group" ng-class="{'has-error':userPasswordForm.re_password.$invalid && !userPasswordForm.re_password.$pristine}">
+              <label for="cre_pass">Retype password</label>
+              <input class="form-control" type="password" name="re_password" required id="retype_password" ng-model="upData.re_password" valid-password-c="upData.password"> 
+              <p ng-show="userPasswordForm.re_password.$error.noMatch" class="help-block">Passwords do not match.</p>
+          </div>                  
+          <button ng-disabled="userPasswordForm.$invalid" ng-click="updatePassword()" class="btn btn-danger m-t pull-right">Update Password</button>
+        </div>
+        <div id="profile_password" class="progress progress-striped active" style="display:none;position: absolute;top: 0px;z-index: 2;background: #e9e9e980;width: 100%;height: 100%;">
+           <div class="dvProgress progress-bar progress-bar-success"  style="display:none;height: 30px;width:0%;top: 50%;position:relative;padding-top: 5px;font-size: medium;" >Password updated successfully</div>               
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- / content -->
+<style type="text/css">  
+  .notification-show-hide {
+    transition: all linear 1s;
+  }
+  .notification-show-hide.ng-hide {
+    opacity: 0;
+    display: none;
+  }
+</style>
+<% include user.footer.ejs %>

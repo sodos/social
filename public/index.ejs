@@ -1,0 +1,267 @@
+<% include header %>
+<body  ng-controller="FcMainController">
+    <div class="container" >
+        <a class="modelClick btn btn-primary" href="javascript:;" data-model="#inquiryModel" style="z-index: 999;position: absolute;">
+            <span>Join</span>
+        </a>
+        <img src="images/wallfinal-cmp.jpg" border="0" alt="" style="width: 100%;z-index: 0;margin: 0px;padding: 0px;position: fixed;left: 0px;top: 0px;">
+    </div>
+
+    <!-- Model HTML -->
+    <div class="customModel" id="inquiryModel">
+        <div class="customModel-backdrop"></div>
+        <div class="model-area">
+            <div class="model-content">
+                <div class="model-remove"></div>
+                <div class="model-body">
+                    <img src="images/logo.jpg" class="img-responsive">
+                    <div class="new_sign_up">
+                        <div class="signup_with_social currentShow">
+                            <h4 class="sign_title">Continue With:</h4>
+                            <ul class="social_signup">
+                                <li class="facebook">
+                                    <a href="javascript:void(0);" onclick="fbLogin()" >
+                                        <span class="social_icon fb"></span>
+                                        <span class="social_text">Facebook</span>
+                                    </a>
+                                    <!-- <fb:login-button scope="public_profile,email" onlogin="checkLoginState();"> -->
+                                    <!-- </fb:login-button> -->
+                                </li>
+                                <li class="google" style="min-height: 39px;padding: 0px;">
+                                    <span class="social_text" style="left:-55%;position: relative;padding-top: 7px;cursor: pointer;clear: both;">Google</span>
+                                    <!-- <a href="/auth/google">
+                                        <span class="social_icon gl"></span>
+                                        
+                                    </a> -->
+                                    <div id="gSignIn" style="z-index:10;width:70%;float: left;position: relative;"></div>
+                                </li>
+                                <li class="twitter">
+                                    <a href="/auth/twitter">
+                                        <span class="social_icon twt"></span>
+                                        <span class="social_text">twitter</span>
+                                    </a>
+                                </li>
+                                <!-- <li class="email">
+                                    <a href="javascript:;">
+                                        <span class="social_icon el"></span>
+                                        <span class="social_text">Email</span>
+                                    </a>
+                                </li> -->
+                            </ul>
+                            <p>
+                                By proceeding, you agree to our 
+                                <a style="cursor: pointer;" onclick="window.open('/privacy-policy', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">Privacy Policy </a>
+                                and 
+                                <a style="cursor: pointer;" onclick="window.open('/terms', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">Terms of Use</a>
+                                .
+                            </p>
+                            <a href="javascript:;" data-show="join_now" class="btn btn-primary btn-block signToggle">Sign Up</a>
+                        </div>
+                        <div id="join_now" class="hidden">
+                            <h4 class="sign_title">Join now — it's free</h4>
+                            <form name="joinForm">
+                                <div class="form-group" ng-class="{ 'has-error' : joinForm.first_name.$invalid && !joinForm.first_name.$pristine }">
+                                    <label for="cre_fname">First Name</label>
+                                    <input class="form-control" name="first_name" ng-model="joinFormData.first_name"  required type="text" id="cre_fname">
+                                    <p ng-show="joinForm.first_name.$invalid && !joinForm.first_name.$pristine" class="help-block">First name is required.</p>
+                                </div>                                
+                                <div class="form-group" ng-class="{ 'has-error' : joinForm.last_name.$invalid && !joinForm.last_name.$pristine }">
+                                    <label for="cre_lname">Last Name</label>
+                                    <input class="form-control" name="last_name" ng-model="joinFormData.last_name" required type="text" id="cre_lname">
+                                    <p ng-show="joinForm.last_name.$invalid && !joinForm.last_name.$pristine" class="help-block">Last name is required.</p>
+                                </div>                                
+                                <div class="form-group" ng-class="{ 'has-error' : joinForm.email.$invalid && !joinForm.email.$pristine }">
+                                    <label>Email address</label>
+                                    <input type="email" name="email" ng-pattern="/^[a-z]+[a-z0-9._]+@[a-z]+\.[a-z0-9.]{2,5}$/" class="form-control" ng-model="joinFormData.email">
+                                    <p ng-show="joinForm.email.$error.pattern" class="help-block">Enter a valid email. </p>
+                                </div>
+                                <div class="form-group" ng-class="{ 'has-error' : joinForm.password.$invalid && !userForm.password.$pristine }">
+                                    <label for="cre_pass">Create a password</label>
+                                    <input class="form-control" ng-pattern="/(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z])/" type="password" ng-required ng-model="joinFormData.password" name="password" ng-minlength="8" ng-maxlength="20">
+                                    <p ng-show="joinForm.password.$error.minlength" class="help-block">Password is too short.</p>
+                                    <p ng-show="joinForm.password.$error.maxlength" class="help-block">Password is too long.</p> 
+                                    <p ng-show="joinForm.password.$error.pattern" class="help-block">
+                                        Must contain one lower &amp; uppercase letter, and one non-alpha character (a number or a symbol.) </p>                                   
+                                </div>
+                                <div class="form-group" ng-class="{'has-error':joinForm.re_password.$invalid && !joinForm.re_password.$pristine}">
+                                    <label for="cre_pass">Retype password</label>
+                                    <input class="form-control" type="password" name="re_password" required id="retype_password" ng-model="joinFormData.re_password" valid-password-c="joinFormData.password"> 
+                                    <p ng-show="joinForm.re_password.$error.noMatch" class="help-block">Passwords do not match.</p>
+                                </div>
+                                <p>
+                                    By proceeding, you agree to our 
+                                    <a style="cursor: pointer;" onclick="window.open('/privacy-policy', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">Privacy Policy </a>
+                                    and 
+                                    <a style="cursor: pointer;" onclick="window.open('/terms', '_blank', 'location=yes,height=570,width=520,scrollbars=yes,status=yes');">Terms of Use</a>
+                                    .
+                                </p>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <button class="btn btn-success btn-block" type="submit" ng-disabled="joinForm.$invalid" ng-click="join()">Join</button>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <button class="btn btn-default btn-block removeToggle" type="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="sign_up">
+                        <div class="already_acc currentShow">
+                            <h4 class="sign_title">Already a Faithcanon member?</h4>
+                            <form name="loginForm">                                
+                                 <div class="form-group" ng-class="{ 'has-error' : loginForm.email.$invalid && !loginForm.email.$pristine }">
+                                    <label>Email address</label>
+                                    <input type="email" name="email" class="form-control" ng-model="loginFormData.email">
+                                    <p ng-show="loginForm.email.$invalid && !loginForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                                </div>
+                                <div class="form-group">
+                                    <label for="sub_pass">Password</label>
+                                    <input class="form-control" type="password" ng-model="loginFormData.password" id="sub_pass">
+                                </div>
+                                <div class="form-group">
+                                    <a href="javascript:;" data-show="forgot_pass" class="signToggle">Forgot Password?</a>
+                                </div>
+                                <button class="btn btn-success" type="submit" ng-disabled="loginForm.$invalid"  ng-click="login()">Log In</button>
+                            </form>
+                        </div>
+                        <div id="forgot_pass" class="hidden">
+                            <h4 class="sign_title">Forgot your password?</h4>
+                            <p>
+                                <small>No problem. Just enter your email address below — we’ll send you a link to reset it.</small>
+                            </p>
+                            <form name="forgotForm">                               
+                                <div class="form-group" ng-class="{ 'has-error' : forgotForm.email.$invalid && !forgotForm.email.$pristine }">
+                                    <label>Email address</label>
+                                    <input type="email" name="email" class="form-control" ng-model="forgotFormData.email">
+                                    <p ng-show="forgotForm.email.$invalid && !forgotForm.email.$pristine" class="help-block">Enter a valid email.</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-xs-6">
+                                        <button class="btn btn-success btn-block" type="submit" ng-disabled="forgotForm.$invalid" ng-click="forgot()">Send Link</button>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <button class="btn btn-default btn-block removeToggle" type="button">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>
+
+
+<script>  
+    
+    window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '171558763579828',
+          cookie     : true,
+          xfbml      : true,
+          version    : 'v2.11'
+        });
+        FB.AppEvents.logPageView();
+
+        // Check whether the user already logged in
+        // FB.getLoginStatus(function(response) {
+        //     if (response.status === 'connected') {
+        //         //display user data
+        //         getFbUserData();
+        //     }
+        // });
+
+    };
+    (function(d, s, id){
+     var js, fjs = d.getElementsByTagName(s)[0];
+     if (d.getElementById(id)) {return;}
+     js = d.createElement(s); js.id = id;
+     js.src = "https://connect.facebook.net/en_US/sdk.js";
+     fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk')); 
+
+    // Facebook login with JavaScript SDK
+    function fbLogin() {
+        FB.login(function (response) {
+            if (response.authResponse) {
+                // Get and display the user profile data
+                getFbUserData();
+            } else {
+                document.getElementById('status').innerHTML = 'User cancelled login or did not fully authorize.';
+            }
+        }, {scope: 'email'});
+    }
+
+    function getFbUserData(){
+        FB.api('/me', {locale: 'en_US', fields: 'id,first_name,last_name,email,link,gender,locale,picture'},
+        function (response) {
+            response.provider = 'facebook';
+            console.log($.cookie());
+            console.log(response);
+            $.post( "/auth/facebook", response)
+              .done(function( data ) {
+                console.log(data.response);
+                location.href = '/ssession/' + data.response;
+              });
+        });
+    }
+
+    // code for google sign in 
+    
+    function onSuccess(googleUser) {
+        var profile = googleUser.getBasicProfile();
+        console.log(profile);
+        profile.provider = 'google';
+        profile.email = profile.U3;
+        profile.first_name = profile.ofa;
+        profile.last_name = profile.wea;
+        
+        $.post( "/auth/google", profile)
+          .done(function( data ) {
+            var auth2 = gapi.auth2.getAuthInstance();
+            auth2.signOut().then(function () {
+               console.log(data.response);
+                location.href = '/ssession/' + data.response;
+            });            
+        });   
+    }
+
+    function onFailure(error) {
+        console.log(error);
+    }
+
+    function renderButton() {
+        ///$(".abcRioButtonContents").append("<p>Google</p>");
+        gapi.signin2.render('gSignIn', {
+            'scope': 'profile email',
+            'width': 200,
+            'longtitle': false,
+            'theme': 'light',
+            'onsuccess': onSuccess,
+            'onfailure': onFailure
+        });        
+    }
+
+    // $( document ).ready(function() {
+    //     $(".abcRioButtonContents").append("<p>Google</p>");
+    // });
+    
+</script>
+<style type="text/css">
+    div.abcRioButtonLightBlue{
+        width: 100% !important;
+        box-shadow:none !important;
+        background: none !important;
+    }
+    span.abcRioButtonContents{
+        float: left !important; 
+        margin-left: 10px !important;
+    }
+
+    span.abcRioButtonContents span{
+        display: none;
+    }    
+</style>
